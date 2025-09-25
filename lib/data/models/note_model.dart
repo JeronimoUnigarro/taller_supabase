@@ -16,8 +16,4 @@ class NoteModel extends NoteEntity {
       createdAt: DateTime.parse(map['created_at']),
     );
   }
-
-  Map<String, dynamic> toMap() {
-    return {'title': title, 'description': description};
-  }
 }

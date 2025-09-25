@@ -7,14 +7,14 @@ class AddNotePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<NoteController>();
     final titleController = TextEditingController();
-    final descriptionController = TextEditingController();
+    final descController = TextEditingController();
+    final controller = Get.find<NoteController>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Nueva Nota')),
+      appBar: AppBar(title: const Text('Agregar Nota')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             TextField(
@@ -23,21 +23,20 @@ class AddNotePage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: descriptionController,
+              controller: descController,
               decoration: const InputDecoration(labelText: 'Descripción'),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
-                if (titleController.text.isNotEmpty) {
-                  await controller.addNote(
-                    titleController.text,
-                    descriptionController.text,
-                  );
+                final title = titleController.text.trim();
+                final desc = descController.text.trim();
+                if (title.isNotEmpty && desc.isNotEmpty) {
+                  await controller.addNote(title, desc);
                   Navigator.pop(context);
                 }
               },
-              child: const Text('Guardar Nota'),
+              child: const Text('Guardar'),
             ),
           ],
         ),
