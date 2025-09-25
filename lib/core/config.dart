@@ -1,4 +1,10 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Config {
-  static const supabaseUrl = 'https://tdoqkghfpjsazfhogwns.supabase.co';
-  static const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+  static String get supabaseUrl => dotenv.env['SUPABASE_URL'] ?? '';
+  static String get supabaseAnonKey => dotenv.env['SUPABASE_ANON_KEY'] ?? '';
+  
+  static Future<void> loadEnv() async {
+    await dotenv.load(fileName: ".env");
+  }
 }
